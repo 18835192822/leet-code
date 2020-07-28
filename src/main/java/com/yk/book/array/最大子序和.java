@@ -45,4 +45,62 @@ public class 最大子序和 {
         }
         return max;
     }
+
+    /**
+     * 先遍历一次判断是否数组中全是负数，如果是的话，直接返回数组中最大值
+     * 再遍历一次，寻找起点和终点
+     * @param nums
+     * @return
+     */
+    public static int maxSubArray2(int[] nums) {
+        int max = nums[0];
+        for (int num : nums) {
+            if(num > max){
+                max = num;
+            }
+
+            if(num > 0){
+                break;
+            }
+        }
+
+        if(max < 0){
+            return max;
+        }
+
+        int start = 0;
+
+        int end = 0;
+
+        int sum = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+
+            //如果sum是0，则代表是刚开始遍历、或者之前的子序和为负数，被强制归0了。此时初始化起点和终点
+            if(sum == 0){
+                start = i;
+                end = i;
+            }
+
+            sum += num;
+
+            //如果和小于0，则把sum归0
+            if(sum <= 0){
+                start = i;
+                end = i;
+                sum = 0;
+                continue;
+            }
+
+            //如果和大于max，则替换，并把终点移动到当前位置
+            if(sum > max){
+                end = i;
+                max = sum;
+            }
+        }
+
+        System.out.println(start + "->" + end);
+        return max;
+    }
 }
