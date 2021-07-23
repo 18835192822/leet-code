@@ -76,6 +76,10 @@ public class 比特位计数 {
      * @return
      */
     public static int[] countBits2(int n) {
+        if(n == 0){
+            return new int[]{0};
+        }
+
         int[] arr = new int[n + 1];
         arr[0] = 0;
         arr[1] = 1;
