@@ -1,5 +1,7 @@
 package com.yk.book.array;
 
+import com.yk.book.basic.ListNode;
+
 /**
  * 给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。
  * <p>
@@ -26,68 +28,17 @@ public class 两数相加 {
 
         int[] arr1 = {2, 4, 3};
         int[] arr2 = {5, 6, 6, 4};
-        ListNode l1 = buildList(arr1);
-        ListNode l2 = buildList(arr2);
+        ListNode l1 = ListNode.buildList(arr1);
+        ListNode l2 = ListNode.buildList(arr2);
 
-        System.out.println(listNodeToString(addTwoNumbers(l1, l2)));
+        System.out.println(ListNode.listNodeToString(addTwoNumbers(l1, l2)));
     }
 
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
-
-    /**
-     * 输出链表
-     * @param listNode
-     * @return
-     */
-    private static String listNodeToString(ListNode listNode) {
-        StringBuilder sb = new StringBuilder("[");
-
-        while (listNode != null) {
-            sb.append(listNode.val).append(",");
-            listNode = listNode.next;
-        }
-
-        return sb.deleteCharAt(sb.length() - 1).append("]").toString();
-    }
-
-    /**
-     * 根据数组构建链表
-     * @param nums
-     * @return
-     */
-    private static ListNode buildList(int[] nums) {
-        ListNode first = new ListNode();
-        ListNode now = first;
-
-        for (int num : nums) {
-            ListNode node = new ListNode(num);
-            now.next = node;
-            now = node;
-        }
-        return first.next;
-    }
 
     /**
      * 因为节点数最多100个，所以不能将链表转换成数字后计算
-     *
+     * <p>
      * 思想是：逐个计算两个链表对应位置节点的和，注意考虑进位、链表长度不一致两个因素即可
-     *
-     *
      *
      * @param l1
      * @param l2
